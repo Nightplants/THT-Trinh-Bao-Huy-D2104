@@ -1,73 +1,52 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import {
-  getDatabase,
-  set,
-  ref,
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAuex480J0Xcxvdj-nSCd61ZtgapNf3fXI",
-  authDomain: "tht-trinh-bao-huy-d2104.firebaseapp.com",
-  databaseURL: "https://tht-trinh-bao-huy-d2104-default-rtdb.firebaseio.com",
-  projectId: "tht-trinh-bao-huy-d2104",
-  storageBucket: "tht-trinh-bao-huy-d2104.firebasestorage.app",
-  messagingSenderId: "267969297800",
-  appId: "1:267969297800:web:9c68370e626f0cb2b3ce3d",
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  databaseURL: "YOUR_DB_URL",
+  projectId: "YOUR_ID",
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth();
+const auth = getAuth(app);
+const db = getDatabase(app);
 
 window.register = function () {
+  let username = document.getElementById("username").value;
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
-  let repassword = document.getElementById("repassword").value;
-  let msg = document.getElementById("msg");
+  let confirmPassword = document.getElementById("confirmPassword").value;
 
-  if (email === "" || password === "" || repassword === "") {
-    msg.style.color = "red";
-    msg.innerText = "Vui lòng nhập đầy đủ thông tin";
-    return;
-  }
-
-  if (password !== repassword) {
-    msg.style.color = "red";
-    msg.innerText = "Mật khẩu nhập lại không khớp!";
-    return;
-  }
-
-  if (password.length < 6) {
-    msg.style.color = "red";
-    msg.innerText = "Mật khẩu phải từ 6 ký tự trở lên";
+  if (password !== confirmPassword) {
+    alert("Mật khẩu không khớp!");
     return;
   }
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      set(ref(database, "users/" + userCredential.user.uid), {
+      let user = userCredential.user;
+
+      set(ref(db, "users/" + user.uid), {
+        username: username,
         email: email,
       });
 
-      msg.style.color = "green";
-      msg.innerText = "Tạo tài khoản thành công!";
-
-      setTimeout(() => {
-        window.location.href = "../Sign_in/index.html";
-      }, 1000);
+      alert("Tạo tài khoản thành công!");
+      window.location.href = "../Sign_in/index.html";
     })
-    .catch((error) => {
-      msg.style.color = "red";
-      msg.innerText = "Email đã tồn tại hoặc không hợp lệ";
-    });
+    .catch((error) => alert(error.message));
 };
 
-window.togglePassword = function (id) {
+window.togglePass = function (id) {
   let input = document.getElementById(id);
   input.type = input.type === "password" ? "text" : "password";
 };
