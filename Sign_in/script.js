@@ -72,7 +72,10 @@ window.login = function () {
 
         if (foundEmail) {
           signInWithEmailAndPassword(auth, foundEmail, password)
-            .then(() => alert("Đăng nhập thành công!"))
+            .then(() => {
+              alert("Đăng nhập thành công!");
+              window.location.href = "../Home/index.html";
+            })
             .catch(() => alert("Sai mật khẩu!"));
         } else {
           alert("Không tìm thấy tài khoản!");
