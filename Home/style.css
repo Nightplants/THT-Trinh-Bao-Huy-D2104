@@ -1,89 +1,46 @@
 body {
-  font-family: Arial;
   margin: 0;
-  background: #f5e4cf;
+  font-family: Arial;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 30px;
+  background: white;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  color: #8b5e3c;
 }
 
-nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-nav a:hover {
-  color: #8b5e3c;
-}
-
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero h1 {
-  font-size: 40px;
-  color: #5a3d2b;
-}
-
-.hero p {
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 25px;
-  background: #b47a45;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-}
-
-.about {
-  padding: 60px;
-  text-align: center;
-  background: white;
-}
-
-.features {
-  padding: 80px 60px;
-  text-align: center;
-}
-
-.feature-box {
+.profile {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 40px;
+  align-items: center;
+  cursor: pointer;
 }
 
-.feature {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 250px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-footer {
+.container {
   text-align: center;
-  padding: 20px;
-  background: #fff;
-  margin-top: 60px;
+  margin-top: 120px;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  background: #4facfe;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
