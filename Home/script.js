@@ -1,20 +1,28 @@
 function loadProfile() {
   let name = localStorage.getItem("name");
-  let avatar = localStorage.getItem("avatar");
+  let profile = localStorage.getItem("profile");
 
   if (name) {
     document.getElementById("name").innerText = name;
   }
 
-  if (avatar) {
-    document.getElementById("avatar").src = avatar;
+  if (profile) {
+    document.getElementById("profile").src = profile;
   }
 }
 
 function goDreams() {
-  window.location.href = "../Dreams/dreams.html";
+  window.location.href = "../Dreams/index.html";
 }
 
 function goAvatar() {
-  window.location.href = "../Avatar/avatar.html";
+  window.location.href = "../Avatar/index.html";
+}
+
+function goDreams() {
+  window.location.href = "../Dreams/index.html";
+}
+
+function goAvatar() {
+  window.location.href = "../Avatar/index.html";
 }

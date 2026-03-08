@@ -1,27 +1,79 @@
 <!doctype html>
-<html>
+<html lang="vi">
   <head>
-    <title>Home</title>
+    <meta charset="UTF-8" />
+    <title>FutureMe</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body onload="loadProfile()">
-    <div class="header">
-      <div class="logo">Dream Website</div>
+    <header>
+      <div class="logo">FutureMe</div>
+
+      <nav>
+        <a href="#">Trang chủ</a>
+        <a href="../Dreams/index.html">Tạo ước mơ</a>
+        <a href="#">Hộp thư</a>
+        <a href="#">Giới thiệu</a>
+      </nav>
 
       <div class="profile" onclick="goAvatar()">
-        <img id="avatar" src="../Avatar/default.png" />
+        <img id="profile" src="../Avatar/default.png" />
         <span id="name">User</span>
       </div>
-    </div>
+    </header>
 
-    <div class="container">
-      <h1>Trang chủ</h1>
+    <section class="hero">
+      <h1>Gửi thư cho chính bạn trong tương lai</h1>
 
-      <p>Chào mừng bạn đến với trang ước mơ</p>
+      <p>Viết một lá thư cho bản thân và mở nó vào một ngày trong tương lai.</p>
+
+      <a class="btn" href="../Dreams/index.html">Viết thư ngay</a>
+    </section>
+
+    <section class="about">
+      <h2>FutureMe là gì?</h2>
+
+      <p>
+        FutureMe giúp bạn lưu giữ suy nghĩ, cảm xúc và ước mơ của mình. Bạn có
+        thể gửi thư cho chính mình và đọc lại sau nhiều năm.
+      </p>
+    </section>
+
+    <section class="features">
+      <h2>Tại sao nên dùng FutureMe?</h2>
+
+      <div class="feature-box">
+        <div class="feature">
+          <h3>💌 Lưu giữ kỷ niệm</h3>
+          <p>Ghi lại suy nghĩ của bạn hôm nay.</p>
+        </div>
+
+        <div class="feature">
+          <h3>⏳ Gửi tới tương lai</h3>
+          <p>Mở lá thư vào ngày bạn chọn.</p>
+        </div>
+
+        <div class="feature">
+          <h3>🔒 Riêng tư</h3>
+          <p>Chỉ bạn mới đọc được thư của mình.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dream">
+      <h2>Tạo ước mơ của bạn</h2>
+
+      <p>Viết mục tiêu và ước mơ bạn muốn đạt được trong tương lai.</p>
+
+      <input type="text" placeholder="Nhập ước mơ của bạn..." />
 
       <button onclick="goDreams()">Tạo ước mơ</button>
-    </div>
+    </section>
+
+    <footer>
+      <p>© 2026 FutureMe</p>
+    </footer>
 
     <script src="script.js"></script>
   </body>

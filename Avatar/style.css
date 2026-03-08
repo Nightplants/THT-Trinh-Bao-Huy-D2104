@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+  font-family: Arial;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+img {
+  width: 120px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
