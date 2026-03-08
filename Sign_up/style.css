@@ -16,9 +16,10 @@ body {
 }
 
 .login-box {
-  background: #fffaf2;
+  background: #e8cca7;
   padding: 40px;
   border-radius: 15px;
+  border: solid 5px beige;
   text-align: center;
   width: 320px;
   margin-top: 80px;
