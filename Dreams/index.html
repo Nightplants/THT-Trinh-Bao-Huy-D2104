@@ -1,22 +1,32 @@
 <!doctype html>
-<html>
+<html lang="vi">
   <head>
-    <title>Dreams</title>
+    <meta charset="UTF-8" />
+    <title>Tạo ước mơ</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body onload="loadDreams()">
-    <h1>Tạo ước mơ</h1>
+  <body>
+    <header>
+      <div class="logo">FutureMe</div>
 
-    <textarea id="dream"></textarea>
+      <nav>
+        <a href="../Home/index.html">Trang chủ</a>
+        <a href="#">Tạo ước mơ</a>
+      </nav>
+    </header>
 
-    <br />
+    <section class="dream">
+      <h1>Tạo ước mơ của bạn</h1>
 
-    <button onclick="saveDream()">Lưu ước mơ</button>
+      <p>Viết mục tiêu và ước mơ bạn muốn đạt được.</p>
 
-    <h2>Danh sách ước mơ</h2>
+      <input id="dreamInput" type="text" placeholder="Nhập ước mơ của bạn..." />
 
-    <ul id="list"></ul>
+      <button onclick="addDream()">Lưu</button>
+
+      <ul id="dreamList"></ul>
+    </section>
 
     <script src="script.js"></script>
   </body>
