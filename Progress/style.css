@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(180deg, #fff6e8, #f6d9ac);
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: burlywood;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #8b5e34;
+}
+
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #333;
+}
+
+.title {
+  text-align: center;
+  margin-top: 40px;
+}
+
+#dreamContainer {
+  width: 600px;
+  margin: 40px auto;
+}
+
+.dream {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dreamTitle {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.steps {
+  margin-top: 15px;
+  display: none;
+}
+
+.steps label {
+  display: block;
+  margin: 6px 0;
+}
+
+.progressBar {
+  height: 8px;
+  background: #eee;
+  border-radius: 5px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #c68c53;
+  width: 0%;
+}
