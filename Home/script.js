@@ -16,7 +16,7 @@ function goDreams() {
 }
 
 function goAvatar() {
-  window.location.href = "../Avatar/index.html";
+  window.location.href = "../Profile/index.html";
 }
 
 function goDreams() {

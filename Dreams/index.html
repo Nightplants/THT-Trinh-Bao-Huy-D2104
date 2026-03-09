@@ -12,8 +12,15 @@
 
       <nav>
         <a href="../Home/index.html">Trang chủ</a>
-        <a href="#">Tạo ước mơ</a>
+        <a href="../Dreams/index.html">Tạo ước mơ</a>
+        <a href="#">Nhật ký</a>
+        <a href="#">Tiến độ</a>
       </nav>
+
+      <div class="profile" onclick="goAvatar()">
+        <img id="profile" src="../Profile/profile.png" />
+        <span id="name">User</span>
+      </div>
     </header>
 
     <section class="dream">
@@ -21,11 +28,17 @@
 
       <p>Viết mục tiêu và ước mơ bạn muốn đạt được.</p>
 
-      <input id="dreamInput" type="text" placeholder="Nhập ước mơ của bạn..." />
+      <input id="dreamName" type="text" placeholder="Tên ước mơ..." />
+
+      <input id="dreamDeadline" type="date" />
+
+      <input
+        id="dreamSteps"
+        type="text"
+        placeholder="Các bước nhỏ (ví dụ: học HTML, CSS...)"
+      />
 
       <button onclick="addDream()">Lưu</button>
-
-      <ul id="dreamList"></ul>
     </section>
 
     <script src="script.js"></script>

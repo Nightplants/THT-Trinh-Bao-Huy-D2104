@@ -1,36 +1,26 @@
 function addDream() {
-  let text = document.getElementById("dreamInput").value;
+  let name = document.getElementById("dreamName").value;
+  let deadline = document.getElementById("dreamDeadline").value;
+  let steps = document.getElementById("dreamSteps").value;
 
-  if (text === "") {
-    alert("Bạn chưa nhập ước mơ");
+  if (name === "") {
+    alert("Bạn chưa nhập tên ước mơ");
     return;
   }
 
   let dreams = JSON.parse(localStorage.getItem("dreams")) || [];
 
-  dreams.push(text);
+  let dream = {
+    name: name,
+    deadline: deadline,
+    steps: steps,
+  };
+
+  dreams.push(dream);
 
   localStorage.setItem("dreams", JSON.stringify(dreams));
 
-  document.getElementById("dreamInput").value = "";
-
-  showDreams();
+  document.getElementById("dreamName").value = "";
+  document.getElementById("dreamDeadline").value = "";
+  document.getElementById("dreamSteps").value = "";
 }
-
-function showDreams() {
-  let dreams = JSON.parse(localStorage.getItem("dreams")) || [];
-
-  let list = document.getElementById("dreamList");
-
-  list.innerHTML = "";
-
-  dreams.forEach((dream) => {
-    let li = document.createElement("li");
-
-    li.innerText = dream;
-
-    list.appendChild(li);
-  });
-}
-
-showDreams();
