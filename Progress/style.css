@@ -1,8 +1,7 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: linear-gradient(180deg, #fff6e8, #f6d9ac);
-  min-height: 100vh;
+  background: linear-gradient(180deg, #fff6e8 0%, #f6d9ac 100%);
 }
 
 header {
@@ -11,6 +10,7 @@ header {
   align-items: center;
   padding: 20px 60px;
   background: burlywood;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -23,6 +23,11 @@ nav a {
   margin-left: 25px;
   text-decoration: none;
   color: #333;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #8b5e34;
 }
 
 .title {
@@ -43,6 +48,11 @@ nav a {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.dream:hover {
+  transform: translateY(-2px);
+  transition: 0.2s;
+}
+
 .dreamTitle {
   font-size: 20px;
   font-weight: bold;
@@ -54,18 +64,25 @@ nav a {
 .steps {
   margin-top: 15px;
   display: none;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
 }
 
 .steps label {
   display: block;
-  margin: 6px 0;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.steps input {
+  margin-right: 8px;
 }
 
 .progressBar {
   height: 8px;
   background: #eee;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 15px;
   overflow: hidden;
 }
 
@@ -73,4 +90,5 @@ nav a {
   height: 100%;
   background: #c68c53;
   width: 0%;
+  transition: width 0.3s;
 }
