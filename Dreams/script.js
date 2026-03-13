@@ -54,3 +54,5 @@ function addDream() {
   document.getElementById("dreamDeadline").value = "";
   document.getElementById("dreamSteps").value = "";
 }
+
+window.addDream = addDream;
