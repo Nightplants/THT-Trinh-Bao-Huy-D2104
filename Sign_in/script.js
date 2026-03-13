@@ -63,9 +63,11 @@ window.login = function () {
       if (snapshot.exists()) {
         let users = snapshot.val();
         let foundEmail = null;
+        let userId = null;
 
         for (let uid in users) {
           if (users[uid].username === input) {
+            userId = users[uid].id;
             foundEmail = users[uid].email;
           }
         }
@@ -74,6 +76,7 @@ window.login = function () {
           signInWithEmailAndPassword(auth, foundEmail, password)
             .then(() => {
               alert("Đăng nhập thành công!");
+              localStorage.setItem("userId", userId);
               window.location.href = "../Home/index.html";
             })
             .catch(() => alert("Sai mật khẩu!"));

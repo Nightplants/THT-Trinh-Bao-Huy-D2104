@@ -69,6 +69,7 @@ window.register = function () {
         username: username,
         email: email,
         password: password,
+        id: user.uid,
       }).then(() => {
         alert("Đăng ký thành công!");
         window.location.href = "../Sign_in/index.html";
