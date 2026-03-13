@@ -1,70 +1,50 @@
-let dreams = JSON.parse(localStorage.getItem("dreams")) || [];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-let container = document.getElementById("dreamContainer");
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-dreams.forEach((dream, index) => {
-  let steps = dream.steps ? dream.steps.split(",") : [];
+import {
+  getDatabase,
+  ref,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  let stepHTML = "";
+const firebaseConfig = {
+  apiKey: "AIzaSyAuex480J0Xcxvdj-nSCd61ZtgapNf3fXI",
+  authDomain: "tht-trinh-bao-huy-d2104.firebaseapp.com",
+  databaseURL: "https://tht-trinh-bao-huy-d2104-default-rtdb.firebaseio.com",
+  projectId: "tht-trinh-bao-huy-d2104",
+  storageBucket: "tht-trinh-bao-huy-d2104.firebasestorage.app",
+  messagingSenderId: "267969297800",
+  appId: "1:267969297800:web:9c68370e626f0cb2b3ce3d",
+  measurementId: "G-V8E9HP76SX",
+};
 
-  steps.forEach((step, i) => {
-    stepHTML += `
-<label>
-<input type="checkbox" onchange="updateProgress(${index})">
-${step}
-</label>
-`;
-  });
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
 
-  container.innerHTML += `
+function loadDreams() {
+  let userId = localStorage.getItem("userId");
 
+  get(ref(db, "users/" + userId + "/dreams")).then((snapshot) => {
+    let container = document.getElementById("dreamContainer");
+    container.innerHTML = "";
+
+    snapshot.forEach((child) => {
+      let dream = child.val();
+
+      let html = `
 <div class="dream">
-
-<div class="dreamTitle" onclick="toggleSteps(${index})">
-
+<div class="dreamTitle">
 ${dream.name}
-
-<span id="percent-${index}">0%</span>
-
+<span>0%</span>
 </div>
-
-<div class="steps" id="steps-${index}">
-
-${stepHTML}
-
-<div class="progressBar">
-
-<div class="progress" id="bar-${index}"></div>
-
 </div>
-
-</div>
-
-</div>
-
 `;
-});
 
-function toggleSteps(index) {
-  let steps = document.getElementById("steps-" + index);
-
-  if (steps.style.display === "block") steps.style.display = "none";
-  else steps.style.display = "block";
-}
-
-function updateProgress(index) {
-  let checkboxes = document.querySelectorAll(`#steps-${index} input`);
-
-  let total = checkboxes.length;
-  let done = 0;
-
-  checkboxes.forEach((cb) => {
-    if (cb.checked) done++;
+      container.innerHTML += html;
+    });
   });
-
-  let percent = Math.round((done / total) * 100);
-
-  document.getElementById("percent-" + index).innerText = percent + "%";
-
-  document.getElementById("bar-" + index).style.width = percent + "%";
 }
+
+loadDreams();
