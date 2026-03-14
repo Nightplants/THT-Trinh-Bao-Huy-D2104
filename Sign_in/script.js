@@ -64,10 +64,12 @@ window.login = function () {
         let users = snapshot.val();
         let foundEmail = null;
         let userId = null;
+        let username = null;
 
         for (let uid in users) {
           if (users[uid].username === input) {
             userId = users[uid].id;
+            username = users[uid].username;
             foundEmail = users[uid].email;
           }
         }
@@ -77,6 +79,7 @@ window.login = function () {
             .then(() => {
               alert("Đăng nhập thành công!");
               localStorage.setItem("userId", userId);
+              localStorage.setItem("username", username)
               window.location.href = "../Home/index.html";
             })
             .catch(() => alert("Sai mật khẩu!"));

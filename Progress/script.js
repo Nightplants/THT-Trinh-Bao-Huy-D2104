@@ -5,6 +5,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-aut
 import {
   getDatabase,
   ref,
+  get,
   set,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -22,6 +23,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+
+function loadProfile() {
+  let name = localStorage.getItem("username");
+  let profile = localStorage.getItem("profile");
+
+  if (name) {
+    document.getElementById("username").innerText = name;
+  }
+
+  if (profile) {
+    document.getElementById("profile").src = profile;
+  }
+}
 
 function loadDreams() {
   let userId = localStorage.getItem("userId");
@@ -41,10 +55,10 @@ ${dream.name}
 </div>
 </div>
 `;
-
       container.innerHTML += html;
     });
   });
 }
 
 loadDreams();
+window.loadProfile = loadProfile;

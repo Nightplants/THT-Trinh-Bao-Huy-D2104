@@ -23,6 +23,19 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
+function loadProfile() {
+  let name = localStorage.getItem("username");
+  let profile = localStorage.getItem("profile");
+
+  if (name) {
+    document.getElementById("username").innerText = name;
+  }
+
+  if (profile) {
+    document.getElementById("profile").src = profile;
+  }
+}
+
 function addDream() {
   let name = document.getElementById("dreamName").value;
   let deadline = document.getElementById("dreamDeadline").value;
@@ -56,3 +69,4 @@ function addDream() {
 }
 
 window.addDream = addDream;
+window.loadProfile = loadProfile;

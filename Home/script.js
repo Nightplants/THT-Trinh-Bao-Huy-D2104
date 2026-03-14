@@ -1,9 +1,9 @@
 function loadProfile() {
-  let name = localStorage.getItem("name");
+  let name = localStorage.getItem("username");
   let profile = localStorage.getItem("profile");
 
   if (name) {
-    document.getElementById("name").innerText = name;
+    document.getElementById("username").innerText = name;
   }
 
   if (profile) {
