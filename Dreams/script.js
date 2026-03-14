@@ -68,5 +68,10 @@ function addDream() {
   document.getElementById("dreamSteps").value = "";
 }
 
+function goProfile() {
+  window.location.href = "../Profile/index.html";
+}
+
 window.addDream = addDream;
 window.loadProfile = loadProfile;
+window.goProfile = goProfile;

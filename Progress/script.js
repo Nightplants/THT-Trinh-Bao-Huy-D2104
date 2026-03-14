@@ -102,8 +102,13 @@ function updateProgress(index) {
   document.getElementById("bar-" + index).style.width = percent + "%";
 }
 
+function goProfile() {
+  window.location.href = "../Profile/index.html";
+}
+
 loadDreams();
 
+window.goProfile = goProfile;
 window.loadProfile = loadProfile;
 window.toggleSteps = toggleSteps;
 window.updateProgress = updateProgress;

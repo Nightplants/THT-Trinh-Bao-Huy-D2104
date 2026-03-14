@@ -11,18 +11,6 @@ function loadProfile() {
   }
 }
 
-function goDreams() {
-  window.location.href = "../Dreams/index.html";
-}
-
-function goAvatar() {
+function goProfile() {
   window.location.href = "../Profile/index.html";
-}
-
-function goDreams() {
-  window.location.href = "../Dreams/index.html";
-}
-
-function goAvatar() {
-  window.location.href = "../Avatar/index.html";
 }
