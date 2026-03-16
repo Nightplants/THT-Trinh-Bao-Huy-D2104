@@ -38,9 +38,9 @@ function validPassword(password) {
   return lengthValid && hasLetter && hasNumber && hasSpecial;
 }
 
-window.register = function () {
-  const username = document.getElementById("username").value;
-  const email = document.getElementById("email").value;
+window.register = async function () {
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
   const repassword = document.getElementById("confirmPassword").value;
 
@@ -48,36 +48,47 @@ window.register = function () {
     alert("Email phải có @ và .com");
     return;
   }
-
   const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{8,30}$/;
-
   if (!passRegex.test(password)) {
     alert("Password phải có chữ, số, ký tự đặc biệt và 8-30 ký tự");
     return;
   }
-
   if (password !== repassword) {
     alert("Mật khẩu nhập lại không khớp");
     return;
   }
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+  try {
+    const snapshot = await get(ref(db, "users"));
 
-      set(ref(db, "users/" + user.uid), {
-        username: username,
-        email: email,
-        password: password,
-        id: user.uid,
-      }).then(() => {
-        alert("Đăng ký thành công!");
-        window.location.href = "../Sign_in/index.html";
-      });
-    })
-    .catch((error) => {
-      alert(error.message);
+    if (snapshot.exists()) {
+      const users = snapshot.val();
+      for (let uid in users) {
+        if (users[uid].username === username) {
+          alert("Username đã tồn tại, hãy chọn username khác.");
+          return;
+        }
+        if (users[uid].email === email) {
+          alert("Email này đã được đăng ký.");
+          return;
+        }
+
+      }
+    }
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    await set(ref(db, "users/" + user.uid), {
+      username: username,
+      email: email,
+      password: password,
+      id: user.uid
     });
+    alert("Đăng ký thành công!");
+    window.location.href = "../Sign_in/index.html";
+  } catch (error) {
+    alert(error.message);
+  }
 };
 
 window.togglePass = function (id) {

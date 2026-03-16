@@ -4,6 +4,7 @@ import {
   getDatabase,
   ref,
   get,
+  update,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
@@ -86,4 +87,49 @@ window.uploadImage = function (event) {
   };
 
   reader.readAsDataURL(file);
+};
+
+window.changeUsername = async function () {
+  let newName = prompt("Nhập username mới:");
+
+  if (!newName) return;
+
+  let userId = localStorage.getItem("userId");
+
+  try {
+    await update(ref(db, "users/" + userId), {
+      username: newName,
+    });
+
+    localStorage.setItem("username", newName);
+
+    document.getElementById("nameText").innerText = newName;
+    document.getElementById("username").innerText = newName;
+
+    alert("Đổi username thành công");
+  } catch (err) {
+    console.log(err);
+    alert("Lỗi khi đổi username");
+  }
+};
+
+window.changePassword = async function () {
+  let newPass = prompt("Nhập mật khẩu mới:");
+
+  if (!newPass) return;
+
+  let userId = localStorage.getItem("userId");
+
+  try {
+    await update(ref(db, "users/" + userId), {
+      password: newPass,
+    });
+
+    document.getElementById("passText").innerText = hideText(newPass);
+
+    alert("Đổi mật khẩu thành công");
+  } catch (err) {
+    console.log(err);
+    alert("Lỗi khi đổi mật khẩu");
+  }
 };
