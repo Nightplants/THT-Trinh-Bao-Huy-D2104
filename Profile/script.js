@@ -1,7 +1,12 @@
-function setProfile() {
-  localStorage.setItem("profile", "../Profile/profile.png");
+function loadProfile() {
+  let name = localStorage.getItem("username");
+  let profile = localStorage.getItem("profile");
 
-  alert("Đã chọn ảnh profile");
+  if (name) {
+    document.getElementById("username").innerText = name;
+  }
 
-  window.location.href = "../Home/index.html";
+  if (profile) {
+    document.getElementById("profile").src = profile;
+  }
 }
