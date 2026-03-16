@@ -57,6 +57,7 @@ window.loadProfile = async function () {
   let username = localStorage.getItem("username") || "User";
 
   document.getElementById("nameText").innerText = username;
+  document.getElementById("username").innerText = username;
 
   let avatar = localStorage.getItem("avatar");
 
