@@ -20,6 +20,20 @@ header {
   color: #8b5e34;
 }
 
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-right: 8px;
+}
+
 nav a {
   margin-left: 25px;
   text-decoration: none;

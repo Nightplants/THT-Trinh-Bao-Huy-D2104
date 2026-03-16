@@ -18,21 +18,47 @@
       </nav>
 
       <div class="profile" onclick="goProfile()">
-        <img id="profile" src="../Profile/profile.png" />
+        <img id="profile" src="../Profile/profile.png" style="width: 10%;"/>
         <span id="username">User</span>
       </div>
     </header>
 
     <div class="container">
       <div class="profile-box">
-        <h1>Chọn ảnh Profile</h1>
+        <input
+          type="file"
+          id="upload"
+          hidden
+          accept="image/*"
+          onchange="uploadImage(event)"
+        />
 
-        <p>Nhấn vào ảnh để sử dụng</p>
+        <img
+          id="avatar"
+          src="profile.png"
+          class="profile-img"
+          onclick="chooseImage()"
+        />
 
-        <img src="profile.png" class="profile-img" onclick="loadProfile()" />
+        <div class="info">
+          <div class="row">
+            <span>Username:</span>
+            <span id="nameText">User</span>
+          </div>
+
+          <div class="row">
+            <span>Password:</span>
+            <span id="passText">****</span>
+          </div>
+
+          <div class="row">
+            <span>Email:</span>
+            <span id="emailText">****</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
