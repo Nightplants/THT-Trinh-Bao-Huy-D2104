@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -12,16 +12,26 @@
 
       <nav>
         <a href="../Home/index.html">Trang chủ</a>
+        <a href="../Dreams/index.html">Tạo ước mơ</a>
+        <a href="#">Nhật ký</a>
+        <a href="../Progress/index.html">Tiến độ</a>
       </nav>
+
+      <div class="profile" onclick="goProfile()">
+        <img id="profile" src="../Profile/profile.png" />
+        <span id="username">User</span>
+      </div>
     </header>
 
-    <section class="profile-box">
-      <h1>Ảnh Profile của bạn</h1>
+    <div class="container">
+      <div class="profile-box">
+        <h1>Chọn ảnh Profile</h1>
 
-      <p>Nhấn vào ảnh để sử dụng làm profile</p>
+        <p>Nhấn vào ảnh để sử dụng</p>
 
-      <img src="profile.png" onclick="setProfile()" />
-    </section>
+        <img src="profile.png" class="profile-img" onclick="setProfile()" />
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
