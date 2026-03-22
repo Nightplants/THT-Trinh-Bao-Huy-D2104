@@ -14,3 +14,17 @@ function loadProfile() {
 function goProfile() {
   window.location.href = "../Profile/index.html";
 }
+
+async function requestNotificationPermission() {
+  if (!("Notification" in window)) {
+    console.log("Trình duyệt này không hỗ trợ thông báo.");
+    return;
+  }
+
+  if (Notification.permission === "default") {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      console.log("Đã được cấp quyền!");
+    }
+  }
+}

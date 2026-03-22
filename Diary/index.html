@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nhật ký</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body onload="loadDiary()">
+    <h1>📔 Nhật ký của bạn</h1>
+
+    <div class="container">
+      <div class="write-box">
+        <textarea
+          id="diaryInput"
+          placeholder="Hôm nay bạn nghĩ gì..."
+        ></textarea>
+        <button onclick="addDiary()">Lưu nhật ký</button>
+      </div>
+
+      <div id="diaryList"></div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
