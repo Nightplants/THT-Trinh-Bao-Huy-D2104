@@ -59,34 +59,6 @@ window.loadProfile = async function () {
 
   document.getElementById("nameText").innerText = username;
   document.getElementById("username").innerText = username;
-
-  let avatar = localStorage.getItem("avatar");
-
-  if (avatar) {
-    document.getElementById("avatar").src = avatar;
-  }
-};
-
-window.chooseImage = function () {
-  document.getElementById("upload").click();
-};
-
-window.uploadImage = function (event) {
-  let file = event.target.files[0];
-
-  if (!file) return;
-
-  let reader = new FileReader();
-
-  reader.onload = function (e) {
-    let img = e.target.result;
-
-    document.getElementById("avatar").src = img;
-
-    localStorage.setItem("avatar", img);
-  };
-
-  reader.readAsDataURL(file);
 };
 
 window.changeUsername = async function () {
@@ -131,5 +103,14 @@ window.changePassword = async function () {
   } catch (err) {
     console.log(err);
     alert("Lỗi khi đổi mật khẩu");
+  }
+};
+
+window.logout = function () {
+  if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+
+    window.location.href = "../Sign_in/index.html"; 
   }
 };

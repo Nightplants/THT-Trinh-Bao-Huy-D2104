@@ -25,20 +25,7 @@
 
     <div class="container">
       <div class="profile-box">
-        <input
-          type="file"
-          id="upload"
-          hidden
-          accept="image/*"
-          onchange="uploadImage(event)"
-        />
-
-        <img
-          id="avatar"
-          src="profile.png"
-          class="profile-img"
-          onclick="chooseImage()"
-        />
+        <img id="avatar" src="profile.png" class="profile-img" />
 
         <div class="info">
           <div class="row">
@@ -58,6 +45,7 @@
             <span id="emailText">****</span>
           </div>
         </div>
+        <button class="Sign_out" onclick="logout()">Đăng xuất</button>
       </div>
     </div>
 
