@@ -6,6 +6,7 @@ import {
   set,
   get,
   push,
+  remove,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
@@ -123,4 +124,46 @@ window.toggleReminder = function () {
   } else {
     box.style.display = "none";
   }
+};
+
+window.checkLetters = async function () {
+  const snapshot = await get(ref(db, "users/" + userId + "/reminders"));
+
+  if (!snapshot.exists()) return;
+
+  let data = snapshot.val();
+  let today = new Date().toISOString().split("T")[0];
+
+  let list = document.getElementById("letterList");
+  list.innerHTML = "";
+
+  let hasLetter = false;
+
+  for (let id in data) {
+    let item = data[id];
+    
+    if (item.date && item.date <= today) {
+      hasLetter = true;
+
+      let div = document.createElement("div");
+      div.className = "letter-item";
+
+      div.innerHTML = `
+        <b>📅 ${item.date}</b>
+        <p>${item.content}</p>
+      `;
+
+      list.appendChild(div);
+
+      await remove(ref(db, "users/" + userId + "/reminders/" + id));
+    }
+  }
+
+  if (hasLetter) {
+    document.getElementById("letterPopup").style.display = "flex";
+  }
+};
+
+window.closePopup = function () {
+  document.getElementById("letterPopup").style.display = "none";
 };

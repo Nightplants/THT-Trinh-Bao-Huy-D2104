@@ -10,6 +10,7 @@
     onload="
       loadDiary();
       loadProfile();
+      checkLetters();
     "
   >
     <header>
@@ -18,7 +19,7 @@
       <nav>
         <a href="../Home/index.html">Trang chủ</a>
         <a href="../Dreams/index.html">Tạo ước mơ</a>
-        <a href="#">Nhật ký</a>
+        <a href="../Diary/index.html">Nhật ký</a>
         <a href="../Progress/index.html">Tiến độ</a>
       </nav>
 
@@ -54,6 +55,16 @@
         <input type="date" id="reminderTime" />
 
         <button onclick="addReminder()">Gửi thư</button>
+      </div>
+
+      <div id="letterPopup" class="popup">
+        <div class="popup-content">
+          <h2>📬 Thư từ quá khứ</h2>
+
+          <div id="letterList"></div>
+
+          <button onclick="closePopup()">Đóng</button>
+        </div>
       </div>
 
       <div id="diaryList"></div>
