@@ -1,12 +1,47 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: linear-gradient(180deg, #fff6e8, #f6d9ac);
-  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff6e8 0%, #f6d9ac 100%);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: burlywood;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #8b5e34;
+}
+
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #333;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
 }
 
 h1 {
   text-align: center;
+  margin-top: 40px;
   color: #8b5e34;
 }
 
@@ -16,38 +51,37 @@ h1 {
   align-items: center;
 }
 
-.write-box {
+.box {
   width: 90%;
   background: white;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 textarea {
   width: 100%;
-  height: 100px;
+  height: 120px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  resize: none;
 }
 
 input {
   width: 100%;
-  margin-top: 10px;
   padding: 10px;
+  margin-top: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 button {
-  margin-top: 10px;
-  padding: 10px;
   width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #c68c53;
   border: none;
-  background: #8b5e34;
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -63,18 +97,26 @@ button {
 .diary-item {
   width: 90%;
   background: white;
-  margin: 10px 0;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .diary-time {
+  color: gray;
   font-size: 14px;
-  color: #888;
   margin-bottom: 10px;
 }
 
-.diary-content {
-  font-size: 16px;
+.toggle-btn {
+  width: 90%;
+  margin-top: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: #8b5e34;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }

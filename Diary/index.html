@@ -6,16 +6,54 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body onload="loadDiary()">
+  <body
+    onload="
+      loadDiary();
+      loadProfile();
+    "
+  >
+    <header>
+      <div class="logo">FutureMe</div>
+
+      <nav>
+        <a href="../Home/index.html">Trang chủ</a>
+        <a href="../Dreams/index.html">Tạo ước mơ</a>
+        <a href="#">Nhật ký</a>
+        <a href="../Progress/index.html">Tiến độ</a>
+      </nav>
+
+      <div class="profile" onclick="goProfile()">
+        <img id="profile" src="../Profile/profile.png" />
+        <span id="username">User</span>
+      </div>
+    </header>
+
     <h1>📔 Nhật ký của bạn</h1>
 
     <div class="container">
-      <div class="write-box">
+      <div class="box">
         <textarea
           id="diaryInput"
           placeholder="Hôm nay bạn nghĩ gì..."
         ></textarea>
         <button onclick="addDiary()">Lưu nhật ký</button>
+      </div>
+
+      <button onclick="toggleReminder()" class="toggle-btn">
+        📩 Gửi thư cho tương lai
+      </button>
+
+      <div class="box" id="reminderBox" style="display: none">
+        <h3>📩 Gửi thư cho tương lai</h3>
+
+        <textarea
+          id="reminderInput"
+          placeholder="Viết điều muốn nhắn bản thân..."
+        ></textarea>
+
+        <input type="date" id="reminderTime" />
+
+        <button onclick="addReminder()">Gửi thư</button>
       </div>
 
       <div id="diaryList"></div>

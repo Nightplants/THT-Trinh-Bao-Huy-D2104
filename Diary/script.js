@@ -16,7 +16,6 @@ const firebaseConfig = {
   storageBucket: "tht-trinh-bao-huy-d2104.firebasestorage.app",
   messagingSenderId: "267969297800",
   appId: "1:267969297800:web:9c68370e626f0cb2b3ce3d",
-  measurementId: "G-V8E9HP76SX",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -24,34 +23,35 @@ const db = getDatabase(app);
 
 let userId = localStorage.getItem("userId");
 
-// =======================
-// LOAD DIARY
-// =======================
+window.loadProfile = function () {
+  let name = localStorage.getItem("username");
+  let avatar = localStorage.getItem("avatar");
+
+  if (name) {
+    document.getElementById("username").innerText = name;
+  }
+
+  if (avatar) {
+    document.getElementById("profile").src = avatar;
+  }
+};
 
 window.loadDiary = async function () {
-  if (!userId) return;
-
   const snapshot = await get(ref(db, "users/" + userId + "/diaries"));
 
-  const list = document.getElementById("diaryList");
+  let list = document.getElementById("diaryList");
   list.innerHTML = "";
 
   if (snapshot.exists()) {
-    const data = snapshot.val();
-
+    let data = snapshot.val();
     let arr = [];
 
     for (let id in data) {
-      arr.push({
-        id: id,
-        ...data[id],
-      });
+      arr.push(data[id]);
     }
 
-    // sort mới nhất
     arr.sort((a, b) => b.time - a.time);
 
-    // render
     arr.forEach((item) => {
       let div = document.createElement("div");
       div.className = "diary-item";
@@ -59,34 +59,28 @@ window.loadDiary = async function () {
       let time = new Date(item.time).toLocaleString();
 
       div.innerHTML = `
-<div class="diary-time">${time}</div>
-<div class="diary-content">${item.content}</div>
-`;
+        <div class="diary-time">${time}</div>
+        <div>${item.content}</div>
+      `;
 
       list.appendChild(div);
     });
   }
 };
 
-// =======================
-// ADD DIARY
-// =======================
-
 window.addDiary = async function () {
   let content = document.getElementById("diaryInput").value;
 
   if (!content) {
-    alert("Nhập nội dung nhật ký");
+    alert("Nhập nội dung");
     return;
   }
-
-  let now = Date.now();
 
   let newRef = push(ref(db, "users/" + userId + "/diaries"));
 
   await set(newRef, {
     content: content,
-    time: now,
+    time: Date.now(),
   });
 
   document.getElementById("diaryInput").value = "";
@@ -94,16 +88,12 @@ window.addDiary = async function () {
   loadDiary();
 };
 
-// =======================
-// ADD REMINDER (KHÔNG HIỂN THỊ)
-// =======================
-
 window.addReminder = async function () {
   let content = document.getElementById("reminderInput").value;
-  let time = document.getElementById("reminderTime").value;
+  let date = document.getElementById("reminderTime").value;
 
-  if (!content || !time) {
-    alert("Nhập đủ nội dung và thời gian");
+  if (!content || !date) {
+    alert("Nhập nội dung và ngày");
     return;
   }
 
@@ -111,11 +101,26 @@ window.addReminder = async function () {
 
   await set(newRef, {
     content: content,
-    time: time,
+    date: date,
+    createdAt: Date.now(),
   });
 
-  alert("Đã lưu nhắc nhở");
+  alert("Đã gửi thư cho tương lai!");
 
   document.getElementById("reminderInput").value = "";
   document.getElementById("reminderTime").value = "";
+};
+
+window.goProfile = function () {
+  window.location.href = "../Profile/index.html";
+};
+
+window.toggleReminder = function () {
+  let box = document.getElementById("reminderBox");
+
+  if (box.style.display === "none") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
 };
