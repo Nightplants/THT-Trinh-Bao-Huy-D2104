@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
-function loadProfile() {
+window.loadProfile = function () {
   let name = localStorage.getItem("username");
   let profile = localStorage.getItem("profile");
 
@@ -34,7 +34,7 @@ function loadProfile() {
   if (profile) {
     document.getElementById("profile").src = profile;
   }
-}
+};
 
 function loadDreams() {
   let userId = localStorage.getItem("userId");
@@ -78,16 +78,16 @@ function loadDreams() {
   });
 }
 
-function toggleSteps(index) {
+window.toggleSteps = function (index) {
   let steps = document.getElementById("steps-" + index);
   if (steps.style.display === "block") {
     steps.style.display = "none";
   } else {
     steps.style.display = "block";
   }
-}
+};
 
-function updateProgress(index) {
+window.updateProgress = function (index) {
   let checkboxes = document.querySelectorAll(`#steps-${index} input`);
   let total = checkboxes.length;
   let done = 0;
@@ -100,15 +100,56 @@ function updateProgress(index) {
   }
   document.getElementById("percent-" + index).innerText = percent + "%";
   document.getElementById("bar-" + index).style.width = percent + "%";
-}
+};
 
-function goProfile() {
+window.goProfile = function () {
   window.location.href = "../Profile/index.html";
-}
+};
 
 loadDreams();
 
-window.goProfile = goProfile;
-window.loadProfile = loadProfile;
-window.toggleSteps = toggleSteps;
-window.updateProgress = updateProgress;
+function calculateDaysLeft(deadline) {
+  const today = new Date();
+  const endDate = new Date(deadline);
+
+  const diffTime = endDate - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}
+
+async function showAllDeadlinesPopup() {
+  let userId = localStorage.getItem("userId");
+  if (!userId) return;
+
+  try {
+    const snapshot = await get(ref(db, "users/" + userId + "/dreams"));
+    if (!snapshot.exists()) return;
+
+    let text = "<b>📅 Deadline các ước mơ:</b><br><br>";
+
+    snapshot.forEach((child) => {
+      let dream = child.val();
+      let daysLeft = calculateDaysLeft(dream.deadline);
+
+      if (daysLeft > 0) {
+        text += `• ${dream.name}: còn <b>${daysLeft}</b> ngày<br>`;
+      } else if (daysLeft === 0) {
+        text += `• ${dream.name}: <b>Hôm nay là deadline!</b><br>`;
+      } else {
+        text += `• ${dream.name}: quá hạn <b>${Math.abs(daysLeft)}</b> ngày<br>`;
+      }
+    });
+
+    document.getElementById("popupText").innerHTML = text;
+    document.getElementById("deadlinePopup").style.display = "block";
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+window.closePopup = function () {
+  document.getElementById("deadlinePopup").style.display = "none";
+}
+
+showAllDeadlinesPopup()
