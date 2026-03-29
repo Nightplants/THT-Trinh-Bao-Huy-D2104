@@ -1,12 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 import {
   getDatabase,
   ref,
-  set,
   get,
+  remove,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
@@ -17,29 +15,79 @@ const firebaseConfig = {
   storageBucket: "tht-trinh-bao-huy-d2104.firebasestorage.app",
   messagingSenderId: "267969297800",
   appId: "1:267969297800:web:9c68370e626f0cb2b3ce3d",
-  measurementId: `G-V8E9HP76SX`,
+  measurementId: "G-V8E9HP76SX",
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 if ("Notification" in window) {
   if (Notification.permission === "granted") {
-    notify();
+    notifyFull();
   } else {
     Notification.requestPermission().then((res) => {
-      if (res === `granted`) {
-        notify();
-      } else if (res === "denied") {
-        alert("Notifications access denied!");
-      } else if (res === "default") {
-        alert("Notifications not given!");
+      if (res === "granted") {
+        notifyFull();
       }
     });
   }
-} else {
-  console.error("Can't access denied!");
 }
 
-function notify() {
-  new Notification("Hello");
+function calculateDaysLeft(deadline) {
+  const today = new Date();
+  const endDate = new Date(deadline);
+
+  const diffTime = endDate - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}
+
+async function notifyFull() {
+  let userId = localStorage.getItem("userId");
+  if (!userId) return;
+
+  let message = "";
+
+  const dreamSnap = await get(ref(db, "users/" + userId + "/dreams"));
+
+  if (dreamSnap.exists()) {
+    const dreams = dreamSnap.val();
+
+    for (let key in dreams) {
+      let dream = dreams[key];
+      let days = calculateDaysLeft(dream.deadline);
+
+      if (days > 0 && days <= 7) {
+        message += `🎯 ${dream.name}: còn ${days} ngày\n`;
+      }
+
+      if (days === 0) {
+        message += `🔥 ${dream.name}: hôm nay là deadline!\n`;
+      }
+    }
+  }
+
+  const letterSnap = await get(ref(db, "users/" + userId + "/reminders"));
+
+  if (letterSnap.exists()) {
+    let today = new Date().toISOString().split("T")[0];
+    const letters = letterSnap.val();
+
+    for (let id in letters) {
+      let item = letters[id];
+
+      if (item.date && item.date <= today) {
+        message += `💌 Thư từ quá khứ:\n${item.content}\n\n`;
+      }
+    }
+  }
+
+  if (message !== "") {
+    new Notification("FutureMe", {
+      body: message,
+    });
+  }
 }
 
 window.loadProfile = function () {
@@ -53,6 +101,8 @@ window.loadProfile = function () {
   if (profile) {
     document.getElementById("profile").src = profile;
   }
+
+  notifyFull();
 };
 
 window.goProfile = function () {
@@ -62,3 +112,7 @@ window.goProfile = function () {
 window.goDreams = function () {
   window.location.href = "../Dreams/index.html";
 };
+
+setInterval(() => {
+  notifyFull();
+}, 60000);
