@@ -21,18 +21,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-if ("Notification" in window) {
-  if (Notification.permission === "granted") {
-    notifyFull();
-  } else {
-    Notification.requestPermission().then((res) => {
-      if (res === "granted") {
-        notifyFull();
-      }
-    });
-  }
-}
-
 function calculateDaysLeft(deadline) {
   const today = new Date();
   const endDate = new Date(deadline);
@@ -44,7 +32,11 @@ function calculateDaysLeft(deadline) {
 }
 
 async function notifyFull() {
+  console.log("notifyFull running...");
+
   let userId = localStorage.getItem("userId");
+  console.log("userId:", userId);
+
   if (!userId) return;
 
   let message = "";
@@ -58,7 +50,7 @@ async function notifyFull() {
       let dream = dreams[key];
       let days = calculateDaysLeft(dream.deadline);
 
-      if (days > 0 && days <= 7) {
+      if (days > 0) {
         message += `🎯 ${dream.name}: còn ${days} ngày\n`;
       }
 
@@ -90,7 +82,7 @@ async function notifyFull() {
   }
 }
 
-window.loadProfile = function () {
+window.loadProfile = async function () {
   let name = localStorage.getItem("username");
   let profile = localStorage.getItem("profile");
 
@@ -102,7 +94,7 @@ window.loadProfile = function () {
     document.getElementById("profile").src = profile;
   }
 
-  notifyFull();
+  await notifyFull();
 };
 
 window.goProfile = function () {
@@ -113,6 +105,12 @@ window.goDreams = function () {
   window.location.href = "../Dreams/index.html";
 };
 
-setInterval(() => {
-  notifyFull();
-}, 60000);
+window.addEventListener("load", async () => {
+  if ("Notification" in window) {
+    if (Notification.permission !== "granted") {
+      await Notification.requestPermission();
+    }
+
+    await notifyFull();
+  }
+});
