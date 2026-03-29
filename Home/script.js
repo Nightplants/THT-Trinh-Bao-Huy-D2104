@@ -17,8 +17,30 @@ const firebaseConfig = {
   storageBucket: "tht-trinh-bao-huy-d2104.firebasestorage.app",
   messagingSenderId: "267969297800",
   appId: "1:267969297800:web:9c68370e626f0cb2b3ce3d",
-  measurementId: "G-V8E9HP76SX",
+  measurementId: `G-V8E9HP76SX`,
 };
+
+if ("Notification" in window) {
+  if (Notification.permission === "granted") {
+    notify();
+  } else {
+    Notification.requestPermission().then((res) => {
+      if (res === `granted`) {
+        notify();
+      } else if (res === "denied") {
+        alert("Notifications access denied!");
+      } else if (res === "default") {
+        alert("Notifications not given!");
+      }
+    });
+  }
+} else {
+  console.error("Can't access denied!");
+}
+
+function notify() {
+  new Notification("Hello");
+}
 
 window.loadProfile = function () {
   let name = localStorage.getItem("username");
