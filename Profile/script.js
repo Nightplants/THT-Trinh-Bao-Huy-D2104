@@ -21,14 +21,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-function hideText(text) {
+function hideText(text, showTextFirstIndexes) {
   if (!text) return "";
 
-  if (text.length <= 4) return text;
+  if (text.length <= showTextFirstIndexes) return text;
 
-  let first = text.substring(0, 4);
+  let first = text.substring(0, showTextFirstIndexes);
 
-  let stars = "*".repeat(text.length - 4);
+  let stars = "*".repeat(text.length - showTextFirstIndexes);
 
   return first + stars;
 }
@@ -47,9 +47,9 @@ window.loadProfile = async function () {
       let email = data.email || "";
       let password = data.password || "";
 
-      document.getElementById("emailText").innerText = hideText(email);
+      document.getElementById("emailText").innerText = hideText(email, 4);
 
-      document.getElementById("passText").innerText = hideText(password);
+      document.getElementById("passText").innerText = hideText(password, 0);
     }
   } catch (err) {
     console.log(err);
@@ -111,6 +111,6 @@ window.logout = function () {
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
 
-    window.location.href = "../Sign_in/index.html"; 
+    window.location.href = "../Sign_in/index.html";
   }
 };

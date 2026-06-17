@@ -20,34 +20,49 @@ header {
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #8b5e34;
+  width: 200px;
+  padding: 5px;
+  transition: 100ms;
 }
 
-nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-nav a:hover {
-  color: #8b5e34;
+.logo:hover {
+  width: 220px;
 }
 
 .profile {
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: 100ms;
+  font-size: larger;
+}
+
+.profile:hover {
+  font-size: x-large;
 }
 
 .profile img {
-  width: 40px !important;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-left: 20px;
   margin-right: 8px;
+}
+
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  font-size: 35px;
+  color: #333;
+  font-weight: 500;
+  transition: 100ms;
+  text-shadow: #0000005b 0px 3px 8px;
+}
+
+nav a:hover {
+  color: #8b5e34;
+  font-size: 40px;
+  text-shadow: #8b5e34 0px 3px 8px;
 }
 
 .profile-box {
