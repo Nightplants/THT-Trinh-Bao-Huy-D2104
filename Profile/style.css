@@ -123,7 +123,12 @@ nav a:hover {
 }
 
 .row button:hover {
-  opacity: 0.8;
+  background: #583b20;
+}
+
+.row .fix-margin {
+  background-color: rgba(0, 0, 0, 0) !important;
+  cursor: auto;
 }
 
 .Sign_out {
