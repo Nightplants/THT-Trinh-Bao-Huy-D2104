@@ -150,3 +150,9 @@ nav a:hover {
   box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
   filter: brightness(1.1);
 }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0);
+}
