@@ -22,18 +22,18 @@ header {
 .logo {
   width: 200px;
   padding: 5px;
-  transition: 100ms;
+  transition: 0.3s;
 }
 
 .logo:hover {
-  width: 220px;
+  transform: scale(1.08);
 }
 
 .profile {
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: 100ms;
+  transition: 0.3s;
   font-size: larger;
 }
 
@@ -55,7 +55,7 @@ nav a {
   font-size: 35px;
   color: #333;
   font-weight: 500;
-  transition: 100ms;
+  transition: 0.3s;
   text-shadow: #0000005b 0px 3px 8px;
 }
 
