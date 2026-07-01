@@ -149,7 +149,7 @@ button:hover {
   cursor: pointer;
 }
 
-.toggle-btn:hover {
+.toggle-btn:hover{
   background: #583b20;
 }
 
@@ -179,10 +179,4 @@ button:hover {
   padding: 10px;
   margin: 10px 0;
   border-bottom: 1px solid #ccc;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0);
 }
