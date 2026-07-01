@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: Arial;
+  min-height: 100vh;
   background: linear-gradient(180deg, #fff6e8 0%, #f6d9ac 100%);
 }
 
@@ -61,7 +62,7 @@ nav a:hover {
 
 .dream {
   text-align: center;
-  margin: 120px auto;
+  margin: 120px auto 0;
   background: white;
   width: 40%;
   padding: 20px;
